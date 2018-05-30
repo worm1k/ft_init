@@ -1,0 +1,3 @@
+/etc/hostname
+# Also need to change /etc/hosts 
+# otherwise many commands will cease functioning

@@ -1,0 +1,18 @@
+# sudo apt-get install mailutils
+
+mkdir -p ~/.tmp
+if [ ! -f ~/.tmp/oldsum ]
+	then
+
+		echo "0 0 * * * /usr/bin/04" >> /etc/crontab
+		md5sum /etc/crontab > ~/.tmp/newsum
+
+	else
+
+		md5sum /etc/crontab > ~/.tmp/newsum
+		if [ "$(diff /root/newsum /root/oldsum)" != "" ]
+		then
+			mail -s "Crontab modified" root
+		fi
+fi
+mv ~/.tmp/newsum ~/.tmp/oldsum
